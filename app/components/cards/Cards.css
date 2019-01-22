@@ -1,0 +1,17 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.header {
+  flex-basis: 100%;
+}
+
+.createCardButton {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 200px;
+}

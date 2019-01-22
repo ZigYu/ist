@@ -1,0 +1,40 @@
+[
+  {
+    "id": "HOME",
+    "path": "/",
+    "title": "Главная",
+    "component": "Home"
+  },
+  {
+    "id": "LESSON_HOUSES",
+    "path": "/lessoncolorhouses",
+    "title": "Расставь крыши, прочитай слово",
+    "component": "LessonColorHouses",
+    "category": "lessons",
+    "categoryTitle": "Задания"
+  },
+  {
+    "id": "LESSON_COLOR_IMAGES",
+    "path": "/lessoncolorimages",
+    "title": "Найди звук, расскрась картинки",
+    "component": "LessonColorImages",
+    "category": "lessons",
+    "categoryTitle": "Задания"
+  },
+  {
+    "id": "LESSON_SYLLABLES",
+    "path": "/lessonsyllables",
+    "title": "Подбери слова на слоги",
+    "component": "LessonSyllables",
+    "category": "lessons",
+    "categoryTitle": "Задания"
+  },
+  {
+    "id": "CARDS",
+    "path": "/cards",
+    "title": "Карточки",
+    "component": "CardsPage",
+    "category": "management",
+    "categoryTitle": "Управление"
+  }
+]

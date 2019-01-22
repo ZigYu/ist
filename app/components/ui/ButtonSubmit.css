@@ -1,0 +1,5 @@
+.buttonSubmit {
+  flex-basis: 100%;
+  justify-content: flex-end;
+  display: flex;
+}

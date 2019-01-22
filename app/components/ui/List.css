@@ -1,0 +1,30 @@
+.list {
+  color: black;
+}
+
+.listItem {
+  height: 35px;
+  margin: 5px 0;
+  white-space: nowrap;
+  background-color: #80808014;
+  border-radius: 5px;
+}
+
+.listItem a {
+  display: block;
+  padding: 0 15px;
+  height: 100%;
+  vertical-align: middle;
+  line-height: 35px;
+}
+
+.listItem:hover {
+  background-color: #3b3b3b14;
+}
+
+.categoryTitle {
+  color: #5d5d5d;
+  font-size: 0.9rem;
+  margin-top: 30px;
+  padding: 0;
+}

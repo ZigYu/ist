@@ -1,0 +1,53 @@
+.app {
+  display: flex;
+  justify-content: space-between;
+  font-family: Arial, Helvetica, Helvetica Neue, serif;
+  font-size: 14px;
+  background: var(--color-lightest);
+  color: var(--color-darkest);
+  transition: color 1s, background 1s;
+}
+
+hr {
+  background: black;
+  height: 1px;
+  border: none;
+  opacity: 0.08;
+  width: 100%;
+}
+
+h2 {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: bold;
+  letter-spacing: -0.025em;
+}
+
+h4 {
+  color: var(--color-darkest);
+  opacity: 0.7;
+  font-weight: normal;
+  font-size: 0.8rem;
+  line-height: 25px;
+  margin: 3px 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  display: inline-block;
+  color: #1b4787;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:active {
+  transform: scale(0.95);
+}

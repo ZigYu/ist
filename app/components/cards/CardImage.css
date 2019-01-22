@@ -1,0 +1,9 @@
+.cardImage {
+  transition: transform 0.2s;
+}
+
+.cardImage img {
+  display: block;
+  width: inherit;
+  height: inherit;
+}

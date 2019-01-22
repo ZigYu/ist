@@ -1,0 +1,8 @@
+.mainContent {
+  flex-grow: 1;
+
+  /* background: url('../static/backgrounds/landscape_river.png') no-repeat center; */
+  background-size: cover;
+  overflow: auto;
+  height: 100vh;
+}

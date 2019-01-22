@@ -1,0 +1,37 @@
+.sidebar {
+  position: relative;
+  width: 200px;
+  height: 100vh;
+  background: url('../../static/backgrounds/sidebar.png') no-repeat;
+  background-size: cover;
+  background-color: var(--color-light);
+  background-blend-mode: multiply;
+  transition: background 1s;
+  z-index: 1;
+  box-shadow: 0 0 20px -5px black;
+}
+
+.contentWrapper {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.content {
+  padding: 20px 30px;
+  min-width: 200px;
+  box-sizing: border-box;
+}
+
+.buttonOpen {
+  position: absolute;
+  top: 10px;
+}
+
+.sidebar.left .buttonOpen {
+  right: -35px;
+}
+
+.sidebar.right .buttonOpen {
+  left: -60px;
+}

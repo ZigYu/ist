@@ -1,0 +1,14 @@
+.workArea {
+  display: flex;
+  padding: 20px 80px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: center;
+  user-select: none;
+  overflow: hidden;
+  background-size: cover;
+  background-color: var(--color-light);
+  background-blend-mode: multiply;
+  transition: background-color 1s;
+}
