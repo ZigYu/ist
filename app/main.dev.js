@@ -16,12 +16,15 @@ import { app, BrowserWindow } from 'electron';
 const pathUtil = require('path');
 
 const isProd = process.env.NODE_ENV === 'production';
-process.env.EXTRA_RESOURCES_PATH = isProd
-  ? pathUtil.join(
-      pathUtil.dirname(app.getPath('exe')),
-      'resources/extraResources'
-    )
-  : pathUtil.join(__dirname, '/../extraResources');
+const isLocalStart = process.env.IS_LOCAL_START === 'true';
+
+process.env.EXTRA_RESOURCES_PATH =
+  isProd && !isLocalStart
+    ? pathUtil.join(
+        pathUtil.dirname(app.getPath('exe')),
+        'resources/extraResources'
+      )
+    : pathUtil.join(__dirname, '/../extraResources');
 
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 
