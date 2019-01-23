@@ -8,10 +8,8 @@
  * When running `yarn build` or `yarn build-main`, this file is compiled to
  * `./app/main.prod.js` using webpack. This gives us some performance wins.
  *
- * @flow
  */
 import { app, BrowserWindow } from 'electron';
-// import MenuBuilder from './menu';
 
 const pathUtil = require('path');
 
@@ -75,6 +73,8 @@ app.on('ready', async () => {
     height: 768
   });
 
+  mainWindow.setMenu(null);
+
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   mainWindow.webContents.on('did-finish-load', () => {
@@ -96,7 +96,4 @@ app.on('ready', async () => {
   if (process.env.DEBUG_PROD === 'true') {
     mainWindow.openDevTools();
   }
-
-  // const menuBuilder = new MenuBuilder(mainWindow);
-  // menuBuilder.buildMenu();
 });
