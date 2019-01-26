@@ -61,8 +61,8 @@ class AppContainer extends Component {
 AppContainer.propTypes = {
   update: PropTypes.func.isRequired,
   config: PropTypes.shape({
-    volumeMusic: PropTypes.string.isRequired,
-    volumeSound: PropTypes.string.isRequired,
+    volumeMusic: PropTypes.number.isRequired,
+    volumeSound: PropTypes.number.isRequired,
     baseColor: PropTypes.string.isRequired
   }).isRequired,
   location: PropTypes.shape({

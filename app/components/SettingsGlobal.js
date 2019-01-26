@@ -21,8 +21,8 @@ export default function SettingsGlobal({ onSubmit, config }) {
 SettingsGlobal.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   config: PropTypes.shape({
-    volumeMusic: PropTypes.string.isRequired,
-    volumeSound: PropTypes.string.isRequired,
+    volumeMusic: PropTypes.number.isRequired,
+    volumeSound: PropTypes.number.isRequired,
     baseColor: PropTypes.string.isRequired
   }).isRequired
 };

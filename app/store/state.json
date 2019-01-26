@@ -48,8 +48,8 @@
       }
     },
     "config": {
-      "volumeMusic": "0",
-      "volumeSound": "100",
+      "volumeMusic": 0,
+      "volumeSound": 100,
       "baseColor": "#0e79b2",
       "colors": {
         "lightest": "#F1F9FE",

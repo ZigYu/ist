@@ -38,6 +38,11 @@ const commonState = {
   onClickFadeCallbacks: [],
   onClickFade(cb) {
     commonState.onClickFadeCallbacks.push(cb);
+    return () => {
+      commonState.onClickFadeCallbacks = commonState.onClickFadeCallbacks.filter(
+        cbInState => cbInState !== cb
+      );
+    };
   },
   clickFade() {
     commonState.onClickFadeCallbacks.forEach(cb => cb());
@@ -48,7 +53,11 @@ export default class Sidebar extends Component {
   state = { isOpen: false };
 
   componentDidMount() {
-    commonState.onClickFade(this.close);
+    this.removeOnClickFade = commonState.onClickFade(this.close);
+  }
+
+  componentWillUnmount() {
+    this.removeOnClickFade();
   }
 
   open = () => this.setState({ isOpen: true });
