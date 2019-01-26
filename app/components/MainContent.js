@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './MainContent.css';
-import Animate, { Fade } from './Animate';
+import Animate, { TopIn } from './Animate';
 
 const MainContent = ({ children, pathname }) => (
   <Animate>
-    <Fade key={pathname} className={styles.mainContent}>
+    <TopIn key={pathname} className={styles.mainContent}>
       {children}
-    </Fade>
+    </TopIn>
   </Animate>
 );
 

@@ -1,85 +1,47 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { SidebarBox } from './ui/Sidebar';
-import IconSettings from './icons/IconSettings';
-import IconQuestionMark from './icons/IconQuestionMark';
-import Tabs, { Tab } from './ui/Tabs';
-import ButtonClose from './ui/ButtonClose';
 import { createPosed } from './Animate';
-import styles from './RightSidebar.css';
+import Tabs, { Tab, TabTitle } from './ui/Tabs';
+import Sidebar, { ButtonSidebar } from './ui/Sidebar';
 import SettingsGlobalContainer from '../containers/SettingsGlobalContainer';
 import SettingsLessonContainer from '../containers/SettingsLessonContainer';
+import IconSettings from './icons/IconSettings';
+import IconQuestionMark from './icons/IconQuestionMark';
 
-export default class RightSidebar extends Component {
-  state = { isOpen: false };
+export default function RightSidebar({ lesson: { manual } }) {
+  return (
+    <Sidebar position="right">
+      <Tabs>
+        <ButtonSidebar>
+          <TabTitle tabId="settings">
+            <TitleIcon>
+              <IconSettings />
+            </TitleIcon>
+          </TabTitle>
 
-  componentDidMount() {
-    // используется портал для рендера кнопок вне Tabs
-    const parentNode = this.rightSidebarRef.current;
-    const childNode = this.tittlesContainer;
-    childNode.classList.add(styles.titles);
-    parentNode.insertBefore(childNode, parentNode.firstChild);
-  }
+          {manual ? (
+            <TabTitle tabId="manual">
+              <TitleIcon>
+                <IconQuestionMark />
+              </TitleIcon>
+            </TabTitle>
+          ) : null}
+        </ButtonSidebar>
 
-  tittlesContainer = document.createElement('div');
+        <Tab tabId="settings">
+          <SettingsLessonContainer />
+          <SettingsGlobalContainer />
+        </Tab>
 
-  rightSidebarRef = React.createRef();
-
-  openSidebar = () => this.setState({ isOpen: true });
-
-  closeSidebar = () => this.setState({ isOpen: false });
-
-  render() {
-    const {
-      lesson: { manual }
-    } = this.props;
-    const { isOpen } = this.state;
-    const pose = isOpen ? 'open' : 'closed';
-
-    return (
-      <div className={styles.rightSidebar} ref={this.rightSidebarRef}>
-        <SidebarBox
-          pose={pose}
-          className={styles.sidebarBox}
-          onClick={this.openSidebar}
-        >
-          <Tabs
-            isOpen={isOpen}
-            positionTitles="left"
-            tittlesContainer={this.tittlesContainer}
-          >
-            <ButtonClose isOpen={isOpen} onClick={this.closeSidebar} />
-
-            <Tab
-              title={
-                <TitleIcon isOpen={isOpen}>
-                  <IconSettings />
-                </TitleIcon>
-              }
-            >
-              <SettingsLessonContainer />
-              <SettingsGlobalContainer />
-            </Tab>
-
-            {manual ? (
-              <Tab
-                title={
-                  <TitleIcon isOpen={isOpen}>
-                    <IconQuestionMark />
-                  </TitleIcon>
-                }
-              >
-                <div>
-                  <h4>Задание</h4>
-                  <div dangerouslySetInnerHTML={{ __html: manual }} />
-                </div>
-              </Tab>
-            ) : null}
-          </Tabs>
-        </SidebarBox>
-      </div>
-    );
-  }
+        {manual ? (
+          <Tab tabId="manual">
+            <h4>Задание</h4>
+            <div dangerouslySetInnerHTML={{ __html: manual }} />
+          </Tab>
+        ) : null}
+      </Tabs>
+    </Sidebar>
+  );
 }
 
 RightSidebar.propTypes = {
@@ -99,21 +61,25 @@ const TitleBox = createPosed({
   }
 });
 
-const TitleIcon = ({ children, isActive, isOpen }) => {
+const TitleIcon = ({ children, isActive, isOpen, onClick }) => {
   const pose = isActive && isOpen ? 'active' : 'inactive';
   const className = isActive && isOpen ? 'active' : 'default';
 
   return (
-    <TitleBox pose={pose}>
+    <TitleBox pose={pose} onClick={onClick}>
       {React.cloneElement(children, { className })}
     </TitleBox>
   );
 };
+
 TitleIcon.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
   children: PropTypes.element.isRequired,
+  onClick: PropTypes.func,
+  isOpen: PropTypes.bool,
   isActive: PropTypes.bool
 };
 TitleIcon.defaultProps = {
+  onClick: () => {},
+  isOpen: false,
   isActive: false
 };

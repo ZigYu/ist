@@ -52,4 +52,3 @@ npm-debug.log.*
 
 documentation
 ignore
-app/store/state.json
