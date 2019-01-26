@@ -130,6 +130,7 @@
   ],
   "jest": {
     "testURL": "http://localhost/",
+    "modulePathIgnorePatterns": ["<rootDir>/ignore/"],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/fileMock.js",
       "\\.(css|less|sass|scss)$": "identity-obj-proxy"
@@ -185,8 +186,8 @@
     "electron": "^3.0.10",
     "electron-builder": "^20.34.0",
     "electron-devtools-installer": "^2.2.4",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.7.0",
+    "enzyme": "3.8.0",
+    "enzyme-adapter-react-16": "1.8.0",
     "enzyme-to-json": "^3.3.5",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",

@@ -1,31 +1,42 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Sidebar from '../../app/components/ui/Sidebar';
+import Sidebar, { ButtonSidebar } from '../../app/components/ui/Sidebar';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+const ButtonSidebarIcon = () => 'icon label';
+
 const props = {
-  position: 'left',
-  children: <div>test</div>
+  position: 'left'
 };
-const sidebar = shallow(<Sidebar {...props} />);
-const clickButtonOpen = () => {
-  sidebar.find('ButtonOpen').simulate('click', { stopPropagation: () => {} });
+const sidebar = mount(
+  <Sidebar {...props}>
+    <ButtonSidebar>
+      <ButtonSidebarIcon />
+    </ButtonSidebar>
+    <div>Sidebar content 1</div>
+    <div>Sidebar content 2</div>
+  </Sidebar>
+);
+
+const clickButton = component => {
+  sidebar
+    .find(component)
+    .find('Button')
+    .simulate('click', { stopPropagation: () => {} });
 };
 
 describe('<Sidebar />', () => {
-  it('Структура Sidebar по умолчанию', () => {
-    expect(sidebar).toMatchSnapshot();
-  });
-
   it('Sidebar откроется после клика на Button', () => {
-    clickButtonOpen();
+    clickButton('ButtonSidebar');
     expect(sidebar.state().isOpen).toEqual(true);
+    expect(sidebar.find('ButtonSidebarIcon').props().isOpen).toEqual(true);
   });
 
   it('Sidebar закроется после клика на Button', () => {
-    clickButtonOpen();
+    clickButton('ButtonClose');
     expect(sidebar.state().isOpen).toEqual(false);
+    expect(sidebar.find('ButtonSidebarIcon').props().isOpen).toEqual(false);
   });
 });

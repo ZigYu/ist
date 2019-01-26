@@ -1,14 +1,25 @@
 .sidebar {
-  position: relative;
-  width: 200px;
+  position: fixed;
+  width: 300px;
   height: 100vh;
   background: url('../../static/backgrounds/sidebar.png') no-repeat;
   background-size: cover;
   background-color: var(--color-light);
   background-blend-mode: multiply;
   transition: background 1s;
-  z-index: 1;
+  z-index: 2;
   box-shadow: 0 0 20px -5px black;
+}
+
+.fade {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: black;
+  will-change: opacity;
 }
 
 .contentWrapper {
@@ -18,20 +29,48 @@
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px 30px;
   min-width: 200px;
   box-sizing: border-box;
 }
+.content h3,
+.content h4 {
+  align-self: flex-start;
+}
 
-.buttonOpen {
+.buttonOpenContainer {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 10px;
 }
 
-.sidebar.left .buttonOpen {
-  right: -35px;
+.buttonOpen {
+  padding-bottom: 10px;
 }
 
-.sidebar.right .buttonOpen {
-  left: -60px;
+.buttonClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.sidebar.left {
+  left: 0;
+}
+
+.sidebar.right {
+  right: 0;
+}
+
+.sidebar.left .buttonOpenContainer {
+  right: -40px;
+}
+
+.sidebar.right .buttonOpenContainer {
+  left: -40px;
 }

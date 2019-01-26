@@ -1,89 +1,136 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import _ from 'lodash';
 import styles from './Sidebar.css';
-import Animate, { Appear, createPosed } from '../Animate';
-import IconHamburger from '../icons/IconHamburger';
+import Animate, { createPosed } from '../Animate';
 import Button from './Button';
 import ButtonClose from './ButtonClose';
 
 const cx = classNames.bind(styles);
 
-export const SidebarBox = createPosed({
+const boxConfigLeft = {
   open: {
-    width: '300px',
+    x: 0,
     staggerChildren: 50,
-    transition: { ease: [0.37, 0.85, 0.53, 0.77], duration: 500 }
+    transition: { type: 'tween' }
   },
   closed: {
-    width: '0px',
-    transition: { ease: [0.37, 0.85, 0.53, 0.77], duration: 500 }
+    x: -300,
+    transition: { type: 'tween' }
   }
+};
+
+const SidebarBoxLeft = createPosed(boxConfigLeft);
+
+const boxConfigRight = _.merge({}, boxConfigLeft);
+boxConfigRight.closed.x = 300;
+const SidebarBoxRight = createPosed(boxConfigRight);
+
+const SidebarFadeBox = createPosed({
+  enter: { opacity: 0.2 },
+  exit: { opacity: 0 }
 });
+
+const SidebarContext = React.createContext();
+
+const commonState = {
+  onClickFadeCallbacks: [],
+  onClickFade(cb) {
+    commonState.onClickFadeCallbacks.push(cb);
+  },
+  clickFade() {
+    commonState.onClickFadeCallbacks.forEach(cb => cb());
+  }
+};
 
 export default class Sidebar extends Component {
   state = { isOpen: false };
 
-  toggleIsOpen = () => {
-    const { isOpen } = this.state;
-    this.setState({ isOpen: !isOpen });
-  };
+  componentDidMount() {
+    commonState.onClickFade(this.close);
+  }
+
+  open = () => this.setState({ isOpen: true });
+
+  close = () => this.setState({ isOpen: false });
 
   render() {
     const { isOpen } = this.state;
-    const { children, position, theme } = this.props;
+    const { children, position } = this.props;
+    const pose = isOpen ? 'open' : 'closed';
+    const SidebarBox = position === 'right' ? SidebarBoxRight : SidebarBoxLeft;
 
-    const className = cx(theme, {
+    const className = cx({
       sidebar: true,
       left: position === 'left',
       right: position === 'right'
     });
 
     return (
-      <SidebarBox className={className} pose={isOpen ? 'open' : 'closed'}>
-        <ButtonOpen
-          {...this.props}
-          isOpen={isOpen}
-          onClick={this.toggleIsOpen}
-        />
-        <div className={styles.contentWrapper}>
-          <div className={styles.content}>
-            <ButtonClose
-              className={styles.buttonClose}
-              isOpen={isOpen}
-              onClick={this.toggleIsOpen}
-            />
-            {children}
-          </div>
-        </div>
-      </SidebarBox>
+      <SidebarContext.Provider
+        value={{
+          isOpen,
+          open: this.open
+        }}
+      >
+        <React.Fragment>
+          <Animate>
+            {isOpen ? (
+              <SidebarFadeBox
+                key="sidebarFade"
+                className={styles.fade}
+                onClick={commonState.clickFade}
+              />
+            ) : null}
+          </Animate>
+
+          <SidebarBox className={className} pose={pose}>
+            <div className={styles.contentWrapper}>
+              <div className={styles.content}>
+                <div className={styles.buttonClose}>
+                  <ButtonClose onClick={this.close} />
+                </div>
+                {children}
+              </div>
+            </div>
+          </SidebarBox>
+        </React.Fragment>
+      </SidebarContext.Provider>
     );
   }
 }
 
 Sidebar.propTypes = {
-  position: PropTypes.oneOf(['left', 'right']).isRequired,
-  openIcon: PropTypes.element
+  children: PropTypes.node.isRequired,
+  position: PropTypes.oneOf(['left', 'right']).isRequired
 };
 
-Sidebar.defaultProps = {
-  openIcon: <IconHamburger />
-};
-
-function ButtonOpen({ onClick, isOpen, openIcon }) {
+export function ButtonSidebar({ children }) {
   return (
-    <div className={styles.buttonOpen}>
-      <Button isTransparent onClick={onClick}>
-        <Animate>
-          {isOpen ? null : <Appear key="openIcon">{openIcon}</Appear>}
-        </Animate>
-      </Button>
-    </div>
+    <SidebarContext.Consumer>
+      {({ open, isOpen }) => (
+        <div className={styles.buttonOpenContainer}>
+          {React.Children.map(children, child => {
+            if (!child) return child;
+            return (
+              <div className={styles.buttonOpen}>
+                <Button isTransparent onClick={open}>
+                  {React.cloneElement(child, { isOpen })}
+                </Button>
+              </div>
+            );
+          })}
+        </div>
+      )
+      // <Animate>
+      //   {isOpen ? null : <Appear key="openIcon">{openIcon}</Appear>}
+      // </Animate>
+      }
+    </SidebarContext.Consumer>
   );
 }
 
-ButtonOpen.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  openIcon: PropTypes.element.isRequired
+ButtonSidebar.propTypes = {
+  children: PropTypes.node.isRequired
 };

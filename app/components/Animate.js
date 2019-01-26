@@ -36,3 +36,12 @@ export const Elevator = createPosed({
     transition: { duration: 500 }
   }
 });
+
+export const TopIn = createPosed({
+  enter: {
+    y: 0
+  },
+  exit: {
+    y: -50
+  }
+});

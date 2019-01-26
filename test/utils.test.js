@@ -6,7 +6,6 @@ describe('проверка методов модуля utils', () => {
     const increment = () =>
       new Promise(resolve => {
         setTimeout(() => {
-          console.log('increment');
           counter += 1;
           resolve();
         });
