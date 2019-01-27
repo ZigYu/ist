@@ -34,10 +34,6 @@ const RoofBox = createPosed({
   exit: {
     opacity: 0,
     y: -200
-  },
-  disappear: {
-    opacity: 0,
-    transition: { duration: 0 }
   }
 });
 
@@ -179,11 +175,11 @@ export default class LessonColorHouses extends Component {
               ) : null}
             </Animate>
 
-            <div className={styles.container}>
+            <div className={styles.containerRoof}>
               <Roofs {...this.state} />
             </div>
 
-            <div className={styles.container}>
+            <div className={styles.containerHouse}>
               <Houses {...this.state} />
             </div>
           </div>
@@ -204,17 +200,12 @@ const Roofs = ({ successMap, indexCardIds, wordArrayShuffled }) => (
       const isSuccess = !!successMap[id];
 
       return (
-        <RoofBox
-          i={i}
-          key={id}
-          className={styles.house}
-          pose={isSuccess ? 'disappear' : 'initial'}
-        >
+        <RoofBox i={i} key={id} className={styles.house}>
           <InteractiveDrag dragId={id}>
-            {!isSuccess ? (
+            <div style={{ visibility: isSuccess ? 'hidden' : 'visible' }}>
               <div className={styles.letterRoof}>{letter}</div>
-            ) : null}
-            <House hideCorpus hideRoof={false} color={colors[letterId]} />
+              <House hideCorpus hideRoof={false} color={colors[letterId]} />
+            </div>
           </InteractiveDrag>
         </RoofBox>
       );
