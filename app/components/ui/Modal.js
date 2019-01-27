@@ -14,14 +14,8 @@ const ModalBox = createPosed({
 });
 
 const BackgroundBox = createPosed({
-  enter: {
-    opacity: 0.5,
-    transition: { duration: 50 }
-  },
-  exit: {
-    opacity: 0,
-    transition: { duration: 50 }
-  }
+  enter: { opacity: 0.2 },
+  exit: { opacity: 0 }
 });
 
 const ContentBox = createPosed({
@@ -59,7 +53,7 @@ export default class Modal extends Component {
       <React.Fragment>
         <Animate>
           {isOpen ? (
-            <ModalBox className={styles.modal} key="TEST">
+            <ModalBox key="modal" className={styles.modal}>
               <BackgroundBox
                 className={styles.background}
                 onClick={this.isOpenToggle}

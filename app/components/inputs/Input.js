@@ -37,6 +37,7 @@ export default class Input extends React.PureComponent {
 
   render() {
     const {
+      name,
       label,
       style,
       value,
@@ -62,6 +63,7 @@ export default class Input extends React.PureComponent {
       <div className={className} style={style}>
         {label ? <h4>{label}</h4> : null}
         <input
+          key={name}
           {...inputProps}
           value={isUncontrolled ? undefined : value}
           onChange={this.onChange}

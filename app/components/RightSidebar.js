@@ -61,7 +61,7 @@ const TitleBox = createPosed({
   }
 });
 
-const TitleIcon = ({ children, isActive, isOpen, onClick }) => {
+function TitleIcon({ children, isActive, isOpen, onClick }) {
   const pose = isActive && isOpen ? 'active' : 'inactive';
   const className = isActive && isOpen ? 'active' : 'default';
 
@@ -70,7 +70,7 @@ const TitleIcon = ({ children, isActive, isOpen, onClick }) => {
       {React.cloneElement(children, { className })}
     </TitleBox>
   );
-};
+}
 
 TitleIcon.propTypes = {
   children: PropTypes.element.isRequired,

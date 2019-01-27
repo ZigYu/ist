@@ -23,20 +23,6 @@ export const Appear = createPosed({
   exit: { scale: 0 }
 });
 
-export const Elevator = createPosed({
-  initial: {
-    y: '-100%'
-  },
-  enter: {
-    y: '0%',
-    transition: { duration: 500 }
-  },
-  exit: {
-    y: '100%',
-    transition: { duration: 500 }
-  }
-});
-
 export const TopIn = createPosed({
   enter: {
     y: 0

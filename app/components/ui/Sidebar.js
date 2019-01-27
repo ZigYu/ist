@@ -83,28 +83,26 @@ export default class Sidebar extends Component {
           open: this.open
         }}
       >
-        <React.Fragment>
-          <Animate>
-            {isOpen ? (
-              <SidebarFadeBox
-                key="sidebarFade"
-                className={styles.fade}
-                onClick={commonState.clickFade}
-              />
-            ) : null}
-          </Animate>
+        <Animate>
+          {isOpen ? (
+            <SidebarFadeBox
+              key="sidebarFade"
+              className={styles.fade}
+              onClick={commonState.clickFade}
+            />
+          ) : null}
+        </Animate>
 
-          <SidebarBox className={className} pose={pose}>
-            <div className={styles.contentWrapper}>
-              <div className={styles.content}>
-                <div className={styles.buttonClose}>
-                  <ButtonClose onClick={this.close} />
-                </div>
-                {children}
+        <SidebarBox className={className} pose={pose}>
+          <div className={styles.contentWrapper}>
+            <div className={styles.content}>
+              <div className={styles.buttonClose}>
+                <ButtonClose onClick={this.close} />
               </div>
+              {children}
             </div>
-          </SidebarBox>
-        </React.Fragment>
+          </div>
+        </SidebarBox>
       </SidebarContext.Provider>
     );
   }
@@ -131,11 +129,7 @@ export function ButtonSidebar({ children }) {
             );
           })}
         </div>
-      )
-      // <Animate>
-      //   {isOpen ? null : <Appear key="openIcon">{openIcon}</Appear>}
-      // </Animate>
-      }
+      )}
     </SidebarContext.Consumer>
   );
 }
