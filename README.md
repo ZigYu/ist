@@ -3,10 +3,9 @@
 Программа призвана повысить эффективность и интерес занятий для детей.
 Репозиторий создан для демонстрации возможностей автора.
 
-<div align="center">
-	<img src="https://drive.google.com/uc?export=download&id=1vMtFCFOA0wdBzh89RalMYHdfcYPJOyEZ"/>
-	<br/>
-	30 fps не отражают всю плавность анимации
+<div>
+<img align="center" src="https://drive.google.com/uc?export=download&id=1izDdDaszB2jjGP42EEbq8KTjUiykKebA" />
+24 fps не отражают всю плавность анимации
 </div>
 
 ### Технологии
