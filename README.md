@@ -36,3 +36,7 @@
 - Манипуляции с SVG элементами
 - Анимация (react-pose, CSS3 keyframes)
 - Звуки, музыка, регулировка громкости
+
+Cкачать Windows билд <a href="https://drive.google.com/uc?export=download&id=1zy7A-VkLOnXI3ip2M0AVncccc4Nl4OLV">IST Setup 0.1.0.exe</a>
+
+Юрий Жигаленко yuriy.zhigalenko@gmail.com
