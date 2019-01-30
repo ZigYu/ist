@@ -4,8 +4,9 @@
 Репозиторий создан для демонстрации возможностей автора.
 
 <div>
-<img align="center" src="https://drive.google.com/uc?export=download&id=1izDdDaszB2jjGP42EEbq8KTjUiykKebA" />
-24 fps не отражают всю плавность анимации
+  <img align="center" src="https://drive.google.com/uc?export=download&id=1izDdDaszB2jjGP42EEbq8KTjUiykKebA" />
+  <br/>
+  24 fps не отражают всю плавность анимации
 </div>
 
 ### Технологии
